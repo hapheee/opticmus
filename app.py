@@ -1,8 +1,8 @@
 import streamlit as st
-import firebase_admin
-from firebase_admin import credentials, db
+# import firebase_admin
+# from firebase_admin import credentials, db
 
-# # # Firebase 인증 정보 가져오기
+# # # # Firebase 인증 정보 가져오기
 # # firebase_config = st.secrets["firebase"]
 
 # # JSON 키를 사용해 Firebase 초기화
