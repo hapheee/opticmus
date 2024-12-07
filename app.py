@@ -24,11 +24,18 @@ def get_data_from_firebase():
 # Streamlit에서 Firebase 데이터 표시
 st.title("Firebase 실시간 데이터")
 
-# Firebase 데이터 가져오기
-while True:
-   data = get_data_from_firebase()
-   if data:
-      st.write("Firebase에서 가져온 데이터:")
-      st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
-   else:
-      pass
+# # Firebase 데이터 가져오기
+# while True:
+#    data = get_data_from_firebase()
+#    if data:
+#       st.write("Firebase에서 가져온 데이터:")
+#       st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
+#    else:
+#       pass
+
+data = get_data_from_firebase()
+if data:
+   st.write("Firebase에서 가져온 데이터:")
+   st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
+else:
+   pass
