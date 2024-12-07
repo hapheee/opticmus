@@ -8,23 +8,24 @@ import json
 encoded_firebase_key = st.secrets["firebase_key"]
 
 # Base64로 인코딩된 firebase_key 디코딩
-decoded_firebase_key = base64.b64decode(encoded_firebase_key)
+try:
+    decoded_firebase_key = base64.b64decode(encoded_firebase_key)
+    # 디코딩된 값 확인
+    st.write("디코딩된 값:", decoded_firebase_key)
 
-# 디코딩된 JSON 데이터를 파싱하여 Firebase 인증에 사용
-firebase_key = json.loads(decoded_firebase_key)
-
-# Firebase 인증 정보로 초기화
-cred = credentials.Certificate(firebase_key)
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
-})
-
-
-
+    # 디코딩된 JSON 데이터를 파싱하여 Firebase 인증에 사용
+    firebase_key = json.loads(decoded_firebase_key)
+    
+    # Firebase 인증 정보로 초기화
+    cred = credentials.Certificate(firebase_key)
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
+    })
+except Exception as e:
+    st.error(f"오류 발생: {e}")
 
 # Firebase에서 데이터 가져오기
 def get_data_from_firebase():
-    # Firebase에서 특정 데이터를 가져오기 위한 참조
     ref = db.reference()  # 데이터 경로를 정확히 입력하세요.
     data = ref.get()  # 데이터 가져오기
     return data
