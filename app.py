@@ -14,11 +14,11 @@ try:
     st.write('1')
 
     if not firebase_admin._apps:
-    cred = credentials.Certificate(firebase_key)
-    firebase_admin.initialize_app(cred, {
-        'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
-    })
-    
+        cred = credentials.Certificate(firebase_key)
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
+        })
+        
 except Exception as e:
     st.error(f"오류 발생: {e}")
 
