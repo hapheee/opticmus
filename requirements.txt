@@ -1,4 +1,8 @@
-streamlit==1.40.2
-firebase-admin==6.6.0
-numpy==1.24.0
+firebase_admin==6.6.0
 matplotlib==3.9.3
+numpy==2.1.3
+pandas==2.2.3
+Pillow==11.0.0
+pyserial==3.5
+seabreeze==2.10.0
+streamlit==1.40.2
