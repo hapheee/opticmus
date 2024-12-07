@@ -4,19 +4,23 @@ from firebase_admin import credentials, db
 import base64
 import json
 
-# Streamlit에서 Firebase key 가져오기
-firebase_key_base64 = st.secrets["firebase_key"]
+# Streamlit에서 secrets 파일에 저장된 firebase_key를 가져오기
+encoded_firebase_key = st.secrets["firebase_key"]
 
-# Base64 디코딩
-decoded_key = base64.b64decode(firebase_key_base64)
+# Base64로 인코딩된 firebase_key 디코딩
+decoded_firebase_key = base64.b64decode(encoded_firebase_key)
 
-# 디코딩된 JSON 데이터를 로드하여 인증 정보로 사용
-cred = credentials.Certificate(json.loads(decoded_key))
+# 디코딩된 JSON 데이터를 파싱하여 Firebase 인증에 사용
+firebase_key = json.loads(decoded_firebase_key)
 
-# Firebase 초기화
+# Firebase 인증 정보로 초기화
+cred = credentials.Certificate(firebase_key)
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
 })
+
+
+
 
 # Firebase에서 데이터 가져오기
 def get_data_from_firebase():
