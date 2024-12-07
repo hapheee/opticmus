@@ -15,9 +15,10 @@ try:
 
     # 디코딩된 JSON 데이터를 파싱하여 Firebase 인증에 사용
     firebase_key = json.loads(decoded_firebase_key)
-    
+    st.write('1')
     # Firebase 인증 정보로 초기화
     cred = credentials.Certificate(firebase_key)
+    st.write('2')
     firebase_admin.initialize_app(cred, {
         'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
     })
