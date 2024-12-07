@@ -1,7 +1,17 @@
 import streamlit as st
+import firebase_admin
+from firebase_admin import credentials, db
 
-st.set_page_config(page_title="tq")
-st.title('ho')
+# Firebase 인증 정보 가져오기
+firebase_config = st.secrets["firebase"]
 
-view = [100, 150, 30]
-view
+# JSON 키를 사용해 Firebase 초기화
+cred = credentials.Certificate(firebase_config["fiberbase_key"])
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://your-project-id.firebaseio.com/'
+})
+
+# Firebase 데이터베이스에 접근
+ref = db.reference('some/data')
+data = ref.get()
+st.write(data)
