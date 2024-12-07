@@ -2,13 +2,13 @@ import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, db
 
-# Firebase 인증 정보 가져오기
-firebase_config = st.secrets["firebase"]
+# # Firebase 인증 정보 가져오기
+# firebase_config = st.secrets["firebase"]
 
 # JSON 키를 사용해 Firebase 초기화
-cred = credentials.Certificate(firebase_config["fiberbase_key"])
+cred = credentials.Certificate("fiberbase_key")
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://your-project-id.firebaseio.com/'
+    'databaseURL': 'https://opticmus.firebaseio.com/'
 })
 
 # Firebase 데이터베이스에 접근
