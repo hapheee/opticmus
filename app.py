@@ -31,4 +31,5 @@ while True:
        st.write("Firebase에서 가져온 데이터:")
        st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
    else:
+      pass
 
