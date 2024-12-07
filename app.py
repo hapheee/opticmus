@@ -1,27 +1,20 @@
-# import streamlit as st
-# import firebase_admin
-# from firebase_admin import credentials, db
-# import base64
-# import json
+import streamlit as st
+import firebase_admin
+from firebase_admin import credentials, db
+import base64
+import json
 
-# # Streamlit에서 secrets 파일에 저장된 firebase_key를 가져오기
-# encoded_firebase_key = st.secrets["firebase_key"]
+# Streamlit에서 secrets 파일에 저장된 firebase_key를 가져오기
+encoded_firebase_key = st.secrets["firebase_key"]
+decoded_firebase_key = base64.b64decode(encoded_firebase_key)
+firebase_key = json.loads(decoded_firebase_key)
+st.write('1')
 
-# # Base64로 인코딩된 firebase_key 디코딩
-# try:
-#     decoded_firebase_key = base64.b64decode(encoded_firebase_key)
-#     firebase_key = json.loads(decoded_firebase_key)
-#     st.write('1')
-
-#     if not firebase_admin._apps:
-#         cred = credentials.Certificate(firebase_key)
-#         firebase_admin.initialize_app(cred, {
-#             'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
-#         })
-        
-# except Exception as e:
-#     st.error(f"오류 발생: {e}")
-
+if not firebase_admin._apps:
+   cred = credentials.Certificate(firebase_key)
+   firebase_admin.initialize_app(cred, {           
+           'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
+        })
 # # Firebase에서 데이터 가져오기
 # def get_data_from_firebase():
 #     ref = db.reference()  # 데이터 경로를 정확히 입력하세요.
