@@ -10,18 +10,15 @@ encoded_firebase_key = st.secrets["firebase_key"]
 # Base64로 인코딩된 firebase_key 디코딩
 try:
     decoded_firebase_key = base64.b64decode(encoded_firebase_key)
-    # 디코딩된 값 확인
-    st.write("디코딩된 값:", decoded_firebase_key)
-
-    # 디코딩된 JSON 데이터를 파싱하여 Firebase 인증에 사용
     firebase_key = json.loads(decoded_firebase_key)
     st.write('1')
-    # Firebase 인증 정보로 초기화
+
+    if not firebase_admin._apps:
     cred = credentials.Certificate(firebase_key)
-    st.write('2')
     firebase_admin.initialize_app(cred, {
         'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
     })
+    
 except Exception as e:
     st.error(f"오류 발생: {e}")
 
