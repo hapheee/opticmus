@@ -54,7 +54,7 @@ if data:
    # y_min = st.sidebar.number_input("Y-axis Min:", min_value=0, max_value=70000, value=0, step=1000,  key="y_min")
    # y_max = st.sidebar.number_input("Y-axis Max:", min_value=0, max_value=70000, value=10000, step=5000,  key="y_max")
    selected_wells = [well for well in data.keys()
-   if  st.sidebar.checkbox(well, False)]
+                           if  st.sidebar.checkbox(well, False)]
    fig, ax = plt.subplots(figsize=(10, 6))
    fig.patch.set_facecolor('#0E1117')  # 전체 배경을 어두운 색으로 설정
    ax.set_facecolor('#0E1117')         # 플롯 배경을 어두운 색으로 설정
@@ -69,13 +69,13 @@ if data:
    ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
            
    if selected_wells:
-   for key in selected_wells:
-   ax.plot(wavelength, data[key], label=key, linewidth=1)
-   ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-   st.pyplot(fig)
-   st.write("All Scanned Data:")
-   df.insert(0, 'Wavelength', wavelength)
-   st.dataframe(df)
+      for key in selected_wells:
+         ax.plot(wavelength, data[key], label=key, linewidth=1)
+      ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
+      st.pyplot(fig)
+      st.write("All Scanned Data:")
+      df.insert(0, 'Wavelength', wavelength)
+      st.dataframe(df)
 
 else:
 st.write("No Scanned Data:")
