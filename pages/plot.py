@@ -73,10 +73,6 @@ if data:
          ax.set_ylabel("Fluorescence intensity", color="black")  # y축 라벨
          ax.legend(title=f"{key} well")
          st.pyplot(fig)
-         ax.set_xticks(np.arange(x_min, x_max + 1, 50))
-         ax.set_yticks(np.arange(y_min, y_max + 1, 1000))
-         ax.set_xticks(np.arange(x_min, x_max + 1, 50))
-         ax.set_yticks(np.arange(y_min, y_max + 1, 1000))
          ax.set_xlim(x_min, x_max)
          ax.set_ylim(y_min, y_max)
          ax.tick_params(axis='x', colors='black')  # x축 눈금 및 레이블 색상
