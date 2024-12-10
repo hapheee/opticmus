@@ -31,3 +31,31 @@ st.write(
 Streamlit. We're generating a bunch of random numbers in a loop for around
 5 seconds. Enjoy!"""
 )
+
+progress_bar = st.sidebar.progress(0)
+status_text = st.sidebar.empty()
+last_rows = np.random.randn(1, 1)
+chart = st.line_chart(last_rows)
+
+
+st.button("Re-run")
+# Firebase 데이터 가져오기
+while True:
+   data = get_data_from_firebase()
+   if data:
+      st.write("Firebase에서 가져온 데이터:")
+      st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
+   else:
+      pass
+
+# data = get_data_from_firebase()
+if data:
+   latest_key = list(data.keys()) # Assume keys are numeric or lexicographically sorted
+
+   st.write(data[latest_key[0]])
+
+# if data:
+#    st.write("Firebase에서 가져온 데이터:")
+#    st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
+# else:
+#    pass
