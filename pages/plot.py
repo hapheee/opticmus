@@ -65,23 +65,22 @@ if data:
    y_max = st.sidebar.number_input("Y-axis Max:", min_value=0, max_value=70000, value=10000, step=5000)
 
    fig, ax = plt.subplots(figsize=(10, 6))
-   if selected_wells:
-      fig.patch.set_facecolor('#0E1117')  # 전체 배경을 어두운 색으로 설정
-      ax.set_facecolor('#0E1117')         # 플롯 배경을 어두운 색으로 설정
-      ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
-      ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
-      ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-      ax.set_xlim(x_min, x_max)
-      ax.set_ylim(y_min, y_max)
-      ax.set_yticks(np.arange(y_min, y_max, y_max/10)) 
-      ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
-      ax.tick_params(axis='x', colors='white') 
-      ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
+   fig.patch.set_facecolor('#0E1117')  # 전체 배경을 어두운 색으로 설정
+   ax.set_facecolor('#0E1117')         # 플롯 배경을 어두운 색으로 설정
+   ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
+   ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
+   ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
+   ax.set_xlim(x_min, x_max)
+   ax.set_ylim(y_min, y_max)
+   ax.set_yticks(np.arange(y_min, y_max, y_max/10)) 
+   ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
+   ax.tick_params(axis='x', colors='white') 
+   ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
       
+   if selected_wells:
       for key in selected_wells:
          ax.plot(wavelength, data[key], label=key, linewidth=1)
       ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-   
    st.pyplot(fig)
 
 else:
