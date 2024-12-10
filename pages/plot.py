@@ -66,14 +66,17 @@ if data:
 
    if selected_wells:
       fig, ax = plt.subplots(figsize=(10, 6))
-      fig.patch.set_facecolor('black')
-      colors = plt.cm.get_cmap('tab10', len(selected_wells))
+      fig.patch.set_facecolor('#1e1e1e')  # 전체 배경을 어두운 색으로 설정
+      ax.set_facecolor('#1e1e1e')         # 플롯 배경을 어두운 색으로 설정
+
+      ax.set_prop_cycle(cycler('color', plt.cm.tab10.colors))  # 색상 자동 순환
+
       for key in selected_wells:
          ax.plot(wavelength, data[key], marker="o", label=key, linewidth=3)
          ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
          ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
          ax.legend(title=f"{key} well")
-         st.pyplot(fig)
+
          ax.set_xlim(x_min, x_max)
          ax.set_ylim(y_min, y_max)
          ax.tick_params(axis='x', colors='white')  # x축 눈금 및 레이블 색상
