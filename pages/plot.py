@@ -40,7 +40,7 @@ status_text = st.sidebar.empty()
 
 st.button("Re-run")
 st.sidebar.header('Plot data')
-st.sidebar.markdown('###Select wells')
+st.sidebar.markdown('### Select wells')
 
 # Firebase 데이터 가져오기
 
@@ -58,23 +58,33 @@ if data:
 
    selected_wells = [well for well in data.keys()
                   if  st.sidebar.checkbox(well, False)]
-
-   # if selected_wells:
-   #    fig, ax = plt.subplots()
-   #    for key in selected_wells:
-   #       ax.plot(wavelength, data[key], marker="o", label=key)
-   #       ax.set_xlabel("Wavelength (nm)")
-   #       ax.set_ylabel("Intensity")
-   #       ax.legend(title=f"{key}")
-   #       st.pyplot(fig)
-   # else:
-   #    st.write("No wells selected for plotting.")
+    # 선택된 wells를 플로팅
    if selected_wells:
       st.write("### Well Data Plot")
-      chart_data = df[['Wavelength'] + selected_wells]
-      st.line_chart(chart_data.set_index('Wavelength'))  # x축: Wavelength, y축: 선택된 데이터
+        
+        # Altair를 사용하여 범위 설정
+      melted_df = df.melt(id_vars=["Wavelength"], var_name="Well", value_name="Intensity")
+      filtered_df = melted_df[melted_df["Well"].isin(selected_wells)]
+
+      chart = alt.Chart(filtered_df).mark_line(point=True).encode(
+      x=alt.X("Wavelength:Q", title="Wavelength (nm)"),
+      y=alt.Y("Intensity:Q", title="Intensity", scale=alt.Scale(domain=[y_min, y_max])),
+      color=alt.Color("Well:N", title="Selected Wells"),
+         tooltip=["Wavelength", "Intensity", "Well"]).properties(
+            width=800,
+            height=400,
+            title="Selected Wells Plot"
+        )
+      st.altair_chart(chart, use_container_width=True)
    else:
-     st.write("No wells selected for plotting.")
+      st.write("No wells selected for plotting.")
+      
+   # if selected_wells:
+   #    st.write("### Well Data Plot")
+   #    chart_data = df[['Wavelength'] + selected_wells]
+   #    st.line_chart(chart_data.set_index('Wavelength'))  # x축: Wavelength, y축: 선택된 데이터
+   # else:
+   #   st.write("No wells selected for plotting.")
 else:
    st.write("No Scanned Data:")
 
