@@ -52,10 +52,10 @@ while True:
       
       df = pd.DataFrame(data) 
    
-      x_min = st.sidebar.number_input("X-axis Min:", min_value=0, max_value=1700, value=900, step=10,  key="x_min")
-      x_max = st.sidebar.number_input("X-axis Max:", min_value=0, max_value=1700, value=1700, step=10,  key="x_max")
-      y_min = st.sidebar.number_input("Y-axis Min:", min_value=0, max_value=70000, value=0, step=1000,  key="y_min")
-      y_max = st.sidebar.number_input("Y-axis Max:", min_value=0, max_value=70000, value=10000, step=5000,  key="y_max")
+      # x_min = st.sidebar.number_input("X-axis Min:", min_value=0, max_value=1700, value=900, step=10,  key="x_min")
+      # x_max = st.sidebar.number_input("X-axis Max:", min_value=0, max_value=1700, value=1700, step=10,  key="x_max")
+      # y_min = st.sidebar.number_input("Y-axis Min:", min_value=0, max_value=70000, value=0, step=1000,  key="y_min")
+      # y_max = st.sidebar.number_input("Y-axis Max:", min_value=0, max_value=70000, value=10000, step=5000,  key="y_max")
    
       selected_wells = [well for well in data.keys()
                      if  st.sidebar.checkbox(well, False)]
@@ -66,9 +66,9 @@ while True:
       ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
       ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
       ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-      ax.set_xlim(x_min, x_max)
-      ax.set_ylim(y_min, y_max)
-      ax.set_yticks(np.arange(y_min, y_max, y_max/10)) 
+      ax.set_xlim(900, 1700)
+      ax.set_ylim(0, 10000)
+      ax.set_yticks(np.arange(0, 10000, y_max/10)) 
       ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
       ax.tick_params(axis='x', colors='white') 
       ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
