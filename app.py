@@ -8,7 +8,6 @@ import json
 encoded_firebase_key = st.secrets["firebase_key"]
 decoded_firebase_key = base64.b64decode(encoded_firebase_key)
 firebase_key = json.loads(decoded_firebase_key)
-st.write('1')
 
 # Initialize 
 if not firebase_admin._apps:
