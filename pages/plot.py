@@ -36,9 +36,7 @@ Streamlit. We're generating a bunch of random numbers in a loop for around
 )
 
 progress_bar = st.sidebar.progress(0)
-st.write(1)
 status_text = st.sidebar.empty()
-st.write(12)
 
 st.button("Re-run")
 st.sidebar.header('Plot data')
@@ -51,25 +49,32 @@ if data:
    #st.write("Firebase에서 가져온 데이터:")
    #st.write(data)  
    st.write("All Scanned Data:")
-   df = pd.DataFrame(data) 
-   st.dataframe(df)
-   
-   # wavelength 데이터를 x축으로 사용
    wavelength = data['wavelength']
    del data['wavelength']
+   
+   df = pd.DataFrame(data) 
+   df.insert(0, 'Wavelength', wavelength)
+   st.dataframe(df)
+
    selected_wells = [well for well in data.keys()
                   if  st.sidebar.checkbox(well, False)]
 
+   # if selected_wells:
+   #    fig, ax = plt.subplots()
+   #    for key in selected_wells:
+   #       ax.plot(wavelength, data[key], marker="o", label=key)
+   #       ax.set_xlabel("Wavelength (nm)")
+   #       ax.set_ylabel("Intensity")
+   #       ax.legend(title=f"{key}")
+   #       st.pyplot(fig)
+   # else:
+   #    st.write("No wells selected for plotting.")
    if selected_wells:
-      fig, ax = plt.subplots()
-      for key in selected_wells:
-         ax.plot(wavelength, data[key], marker="o", label=key)
-         ax.set_xlabel("Wavelength (nm)")
-         ax.set_ylabel("Intensity")
-         ax.legend(title=f"{key}")
-         st.pyplot(fig)
+      st.write("### Well Data Plot")
+      chart_data = df[['Wavelength'] + selected_wells]
+      st.line_chart(chart_data.set_index('Wavelength'))  # x축: Wavelength, y축: 선택된 데이터
    else:
-      st.write("No wells selected for plotting.")
+     st.write("No wells selected for plotting.")
 else:
    st.write("No Scanned Data:")
 
