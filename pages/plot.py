@@ -58,33 +58,35 @@ if data:
 
    selected_wells = [well for well in data.keys()
                   if  st.sidebar.checkbox(well, False)]
+
+    x_min = st.sidebar.number_input("X-axis Min:", min_value=float(min(wavelength)), max_value=float(max(wavelength)), value=900.0, step=10.0)
+    x_max = st.sidebar.number_input("X-axis Max:", min_value=float(x_min), max_value=float(max(wavelength)), value=1400.0, step=10.0)
+    y_min = st.sidebar.number_input("Y-axis Min:", min_value=0.0, max_value=float(max(df.iloc[:, 1:].max())), value=0.0, step=100.0)
+    y_max = st.sidebar.number_input("Y-axis Max:", min_value=float(y_min), max_value=float(max(df.iloc[:, 1:].max())), value=10000.0, step=100.0)
+
     # 선택된 wells를 플로팅
    if selected_wells:
-      st.write("### Well Data Plot")
-        
-        # Altair를 사용하여 범위 설정
-      melted_df = df.melt(id_vars=["Wavelength"], var_name="Well", value_name="Intensity")
-      filtered_df = melted_df[melted_df["Well"].isin(selected_wells)]
+      fig, ax = plt.subplots(figsize=(10, 6))
+      for key in selected_wells:
+         ax.plot(wavelength, data[key], marker="o", label=key, linewidth=3)
+         ax.set_xlabel("Wavelength (nm)", color="black")  # x축 라벨
+         ax.set_ylabel("Fluorescence intensity", color="black")  # y축 라벨
+         ax.legend(title=f"{key} well")
+         st.pyplot(fig)
+         ax.set_xticks(np.arange(x_min, x_max + 1, 50))
+         ax.set_yticks(np.arange(y_min, y_max + 1, 1000))
+         ax.set_xticks(np.arange(x_min, x_max + 1, 50))
+         ax.set_yticks(np.arange(y_min, y_max + 1, 1000))
+         ax.set_xlim(x_min, x_max)
+         ax.set_ylim(y_min, y_max)
+         ax.tick_params(axis='x', colors='black')  # x축 눈금 및 레이블 색상
+         ax.tick_params(axis='y', colors='black')  # y축 눈금 및 레이블 색상
+         ax.grid(color='gray', linestyle='--', linewidth=0.5)
 
-      chart = alt.Chart(filtered_df).mark_line(point=True).encode(
-      x=alt.X("Wavelength:Q", title="Wavelength (nm)"),
-      y=alt.Y("Intensity:Q", title="Intensity", scale=alt.Scale(domain=[y_min, y_max])),
-      color=alt.Color("Well:N", title="Selected Wells"),
-         tooltip=["Wavelength", "Intensity", "Well"]).properties(
-            width=800,
-            height=400,
-            title="Selected Wells Plot"
-        )
-      st.altair_chart(chart, use_container_width=True)
    else:
       st.write("No wells selected for plotting.")
-      
-   # if selected_wells:
-   #    st.write("### Well Data Plot")
-   #    chart_data = df[['Wavelength'] + selected_wells]
-   #    st.line_chart(chart_data.set_index('Wavelength'))  # x축: Wavelength, y축: 선택된 데이터
-   # else:
-   #   st.write("No wells selected for plotting.")
+
+   
 else:
    st.write("No Scanned Data:")
 
