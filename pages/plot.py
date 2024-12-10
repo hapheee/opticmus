@@ -37,28 +37,42 @@ progress_bar = st.sidebar.progress(0)
 st.write(1)
 status_text = st.sidebar.empty()
 st.write(12)
-last_rows = np.random.randn(1, 1)
-st.write(3)
-chart = st.line_chart(last_rows)
-st.write(4)
 
-st.write(1)
 st.button("Re-run")
-# Firebase 데이터 가져오기
-while True:
-   data = get_data_from_firebase()
-   if data:
-      st.write("Firebase에서 가져온 데이터:")
-      st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
-      st.writd(2)
-   else:
-      pass
+st.sidebar.header('Plot data')
+st.sidebar.markdown('###Select wells')
 
-# data = get_data_from_firebase()
+# Firebase 데이터 가져오기
+
+data = get_data_from_firebase()
 if data:
-   latest_key = list(data.keys()) # Assume keys are numeric or lexicographically sorted
-   st.write(2)
-   st.write(data[latest_key[0]])
+   #st.write("Firebase에서 가져온 데이터:")
+   #st.write(data)  
+   st.write("All Scanned Data:")
+   df = pd.DataFrame(data) 
+   st.dataframe(df)
+   
+   # wavelength 데이터를 x축으로 사용
+   wavelength = data['wavelength']
+   del data['wavelength']]
+   selected_wells = [well for well in data.keys()
+                  if well != 'wavelength' & st.sidebar.checkbox(well, False)]
+
+    if selected_wells:
+        fig, ax = plt.subplots()
+        for key in selected_wells:
+            ax.plot(wavelength, data[key], marker="o", label=key)
+        
+        ax.set_xlabel("Wavelength (nm)")
+        ax.set_ylabel("Intensity")
+        ax.legend(title=f"{key}")
+        st.pyplot(fig)
+    else:
+        st.write("No wells selected for plotting.")
+else:
+   st.write("No Scanned Data:")
+
+
 
 # if data:
 #    st.write("Firebase에서 가져온 데이터:")
