@@ -32,10 +32,14 @@ Streamlit. We're generating a bunch of random numbers in a loop for around
 5 seconds. Enjoy!"""
 )
 
-# progress_bar = st.sidebar.progress(0)
-# status_text = st.sidebar.empty()
-# last_rows = np.random.randn(1, 1)
-# chart = st.line_chart(last_rows)
+progress_bar = st.sidebar.progress(0)
+st.write(1)
+status_text = st.sidebar.empty()
+st.write(12)
+last_rows = np.random.randn(1, 1)
+st.write(3)
+chart = st.line_chart(last_rows)
+st.write(4)
 
 st.write(1)
 st.button("Re-run")
