@@ -72,12 +72,11 @@ if data:
       for key in selected_wells:
          ax.plot(wavelength, data[key], label=key, linewidth=1)
       ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-      st.pyplot(fig)
-      st.write("All Scanned Data:")
-      df.insert(0, 'Wavelength', wavelength)
-      st.dataframe(df)
-   else:
-      pass
+   st.pyplot(fig)
+   st.write("All Scanned Data:")
+   df.insert(0, 'Wavelength', wavelength)
+   st.dataframe(df)
+
 else:
    st.write("No Scanned Data:")
 
