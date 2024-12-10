@@ -4,6 +4,7 @@ from firebase_admin import credentials, db
 import base64
 import json
 import numpy as np 
+import pandas
 
 # Streamlit에서 secrets 파일에 저장된 firebase_key를 가져오기
 encoded_firebase_key = st.secrets["firebase_key"]
