@@ -7,3 +7,4 @@ pyserial==3.5
 seabreeze==2.10.0
 streamlit==1.40.2
 altair==5.5.0
+
