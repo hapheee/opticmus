@@ -19,7 +19,7 @@ if not firebase_admin._apps:
    
 # Firebase에서 데이터 가져오기
 def get_data_from_firebase():
-    ref = db.reference()  # 데이터 경로를 정확히 입력하세요.
+    ref = db.reference('plate_reader_data')  # firebase에 저장해둔 경로 
     data = ref.get()  # 데이터 가져오기
     return data
 
