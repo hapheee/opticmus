@@ -37,10 +37,9 @@ st.title("Firebase 실시간 데이터")
 
 data = get_data_from_firebase()
 if data:
-   latest_key = max(data.keys())  # Assume keys are numeric or lexicographically sorted
+   latest_key = list(ref.get().keys())[-1] # Assume keys are numeric or lexicographically sorted
    latest_y_values = data[latest_key]
-   wavelength = data.get("wavelength", [])
-   st.write(wavelength)
+   st.write(data[latest_key])
 # if data:
 #    st.write("Firebase에서 가져온 데이터:")
 #    st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
