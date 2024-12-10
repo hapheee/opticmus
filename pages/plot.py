@@ -73,26 +73,28 @@ if data:
          ax.plot(wavelength, data[key], label=key, linewidth=1)
       ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
       ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
-      ax.legend(title="Wells", facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
+      ax.legend(title="Wells", labelcolor = 'white',facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
       ax.set_xlim(x_min, x_max)
       ax.set_ylim(y_min, y_max)
-      ax.set_yticks(np.arange(x_min, y_max, y_max/10)) 
+      ax.set_yticks(np.arange(y_min, y_max, y_max/10)) 
       ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
       ax.tick_params(axis='x', colors='white') 
+      ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
       
 
    
    else:
-      fig.patch.set_facecolor('#0E1117')  # 전체 배경을 어두운 색으로 설정
+      fig.patch.set_facecolor('white')  # 전체 배경을 어두운 색으로 설정
       ax.set_facecolor('#0E1117')         # 플롯 배경을 어두운 색으로 설정
       ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
       ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
       ax.set_xlim(x_min, x_max)
       ax.set_ylim(y_min, y_max)
-      ax.set_yticks(np.arange(x_min, y_max, y_max/10)) 
-      ax.legend(title="Wells", facecolor='white', edgecolor='white', labelcolor='white')
+      ax.set_yticks(np.arange(y_min, y_max, y_max/10)) 
+      ax.legend(title="Wells", labelcolor = 'white', facecolor='white', edgecolor='white', labelcolor='white')
       ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
       ax.tick_params(axis='x', colors='white') 
+      ax.grid(axis='y', color='white', linestyle='--', linewidth=0.5)
 
    st.pyplot(fig)
 
