@@ -37,7 +37,7 @@ Streamlit. We're generating a bunch of random numbers in a loop for around
 # last_rows = np.random.randn(1, 1)
 # chart = st.line_chart(last_rows)
 
-st.writes(1)
+st.write(1)
 st.button("Re-run")
 # Firebase 데이터 가져오기
 while True:
