@@ -59,10 +59,10 @@ if data:
    selected_wells = [well for well in data.keys()
                   if  st.sidebar.checkbox(well, False)]
 
-    x_min = st.sidebar.number_input("X-axis Min:", min_value=float(min(wavelength)), max_value=float(max(wavelength)), value=900.0, step=10.0)
-    x_max = st.sidebar.number_input("X-axis Max:", min_value=float(x_min), max_value=float(max(wavelength)), value=1400.0, step=10.0)
-    y_min = st.sidebar.number_input("Y-axis Min:", min_value=0.0, max_value=float(max(df.iloc[:, 1:].max())), value=0.0, step=100.0)
-    y_max = st.sidebar.number_input("Y-axis Max:", min_value=float(y_min), max_value=float(max(df.iloc[:, 1:].max())), value=10000.0, step=100.0)
+   x_min = st.sidebar.number_input("X-axis Min:", min_value=float(min(wavelength)), max_value=float(max(wavelength)), value=900.0, step=10.0)
+   x_max = st.sidebar.number_input("X-axis Max:", min_value=float(x_min), max_value=float(max(wavelength)), value=1400.0, step=10.0)
+   y_min = st.sidebar.number_input("Y-axis Min:", min_value=0.0, max_value=float(max(df.iloc[:, 1:].max())), value=0.0, step=100.0)
+   y_max = st.sidebar.number_input("Y-axis Max:", min_value=float(y_min), max_value=float(max(df.iloc[:, 1:].max())), value=10000.0, step=100.0)
 
     # 선택된 wells를 플로팅
    if selected_wells:
