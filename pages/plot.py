@@ -37,7 +37,7 @@ status_text = st.sidebar.empty()
 last_rows = np.random.randn(1, 1)
 chart = st.line_chart(last_rows)
 
-
+st.writd(1)
 st.button("Re-run")
 # Firebase 데이터 가져오기
 while True:
@@ -45,13 +45,14 @@ while True:
    if data:
       st.write("Firebase에서 가져온 데이터:")
       st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
+      st.writd(2)
    else:
       pass
 
 # data = get_data_from_firebase()
 if data:
    latest_key = list(data.keys()) # Assume keys are numeric or lexicographically sorted
-
+   st.writd(2)
    st.write(data[latest_key[0]])
 
 # if data:
