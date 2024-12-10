@@ -24,8 +24,8 @@ def get_data_from_firebase():
     return data
 
 # Streamlit에서 Firebase 데이터 표시
-st.title("Firebase 실시간 데이터")
-
+st.set_page_config(page_title="Plate Reader Data", layout="wide", page_icon="📈")
+menu = st.sidebar.radio("Menu", ["Welcome", "PLOT", "Datas"])
 # # Firebase 데이터 가져오기
 # while True:
 #    data = get_data_from_firebase()
