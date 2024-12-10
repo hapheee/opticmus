@@ -52,10 +52,10 @@ while True:
       
       df = pd.DataFrame(data) 
    
-      x_min = st.sidebar.number_input("X-axis Min:", min_value=0, max_value=1700, value=900, step=10)
-      x_max = st.sidebar.number_input("X-axis Max:", min_value=0, max_value=1700, value=1700, step=10)
-      y_min = st.sidebar.number_input("Y-axis Min:", min_value=0, max_value=70000, value=0, step=1000)
-      y_max = st.sidebar.number_input("Y-axis Max:", min_value=0, max_value=70000, value=10000, step=5000)
+      x_min = st.sidebar.number_input("X-axis Min:", min_value=0, max_value=1700, value=900, step=10,  key="x_min")
+      x_max = st.sidebar.number_input("X-axis Max:", min_value=0, max_value=1700, value=1700, step=10,  key="x_max")
+      y_min = st.sidebar.number_input("Y-axis Min:", min_value=0, max_value=70000, value=0, step=1000,  key="y_min")
+      y_max = st.sidebar.number_input("Y-axis Max:", min_value=0, max_value=70000, value=10000, step=5000,  key="y_max")
    
       selected_wells = [well for well in data.keys()
                      if  st.sidebar.checkbox(well, False)]
