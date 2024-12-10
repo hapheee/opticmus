@@ -64,6 +64,17 @@ if data:
    y_min = st.sidebar.number_input("Y-axis Min:", min_value=0, max_value=70000, value=0, step=2000)
    y_max = st.sidebar.number_input("Y-axis Max:", min_value=0, max_value=70000, value=10000, step=2000)
 
+   fig, ax = plt.subplots(figsize=(10, 6))
+   ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
+   ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
+   ax.legend(title="Wells", facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
+
+   ax.set_xlim(x_min, x_max)
+   ax.set_ylim(y_min, y_max)
+   ax.tick_params(axis='x', colors='white')  # x축 눈금 및 레이블 색상
+   ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
+   ax.grid(color='white', linestyle='--', linewidth=1)
+   
    if selected_wells:
       fig, ax = plt.subplots(figsize=(10, 6))
       fig.patch.set_facecolor('#1e1e1e')  # 전체 배경을 어두운 색으로 설정
@@ -72,21 +83,12 @@ if data:
       ax.set_prop_cycle(cycler(color=color_cycle))
 
       for key in selected_wells:
-         ax.plot(wavelength, data[key], marker="o", label=key, linewidth=3)
-      ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
-      ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
-      ax.legend(title="Wells", facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-
-      ax.set_xlim(x_min, x_max)
-      ax.set_ylim(y_min, y_max)
-      ax.tick_params(axis='x', colors='white')  # x축 눈금 및 레이블 색상
-      ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
-      ax.grid(color='white', linestyle='--', linewidth=0.1)
-      st.pyplot(fig)
-
+         ax.plot(wavelength, data[key], marker="o", label=key, linewidth=1)
    else:
-      st.write("No wells selected for plotting.")
-   
+      ax.text(0.5, 0.5, "No wells selected",
+      fontsize=16, color="white", ha='center', va='center', transform=ax.transAxes)
+   st.pyplot(fig)
+
 else:
    st.write("No Scanned Data:")
 
