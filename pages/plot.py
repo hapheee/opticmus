@@ -78,7 +78,7 @@ if data:
       ax.set_ylim(y_min, y_max)
       ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
       ax.tick_params(axis='x', colors='white') 
-      ax.grid(axis='ㅛ', color='white', linestyle='--', linewidth=0.5)
+      ax.grid(axis='y', color='white', linestyle='--', linewidth=0.5)
 
    
    else:
@@ -91,7 +91,7 @@ if data:
       ax.legend(title="Wells", facecolor='white', edgecolor='white', labelcolor='white')
       ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
       ax.tick_params(axis='x', colors='white') 
-      ax.grid(axis='ㅛ', color='white', linestyle='--', linewidth=0.5)
+      ax.grid(axis='y', color='white', linestyle='--', linewidth=0.5)
 
    st.pyplot(fig)
 
