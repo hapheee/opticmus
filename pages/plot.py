@@ -58,7 +58,7 @@ if data:
    wavelength = data['wavelength']
    del data['wavelength']
    selected_wells = [well for well in data.keys()
-                  if well != 'wavelength' & st.sidebar.checkbox(well, False)]
+                  if  st.sidebar.checkbox(well, False)]
 
    if selected_wells:
       fig, ax = plt.subplots()
