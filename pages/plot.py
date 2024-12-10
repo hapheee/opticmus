@@ -68,7 +68,7 @@ while True:
       ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
       ax.set_xlim(900, 1700)
       ax.set_ylim(0, 10000)
-      ax.set_yticks(np.arange(0, 10000, y_max/10)) 
+      ax.set_yticks(np.arange(0, 10000, 10000/10)) 
       ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
       ax.tick_params(axis='x', colors='white') 
       ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
