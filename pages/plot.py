@@ -76,9 +76,10 @@ if data:
       st.write("All Scanned Data:")
       df.insert(0, 'Wavelength', wavelength)
       st.dataframe(df)
-
+   else:
+      pass
 else:
-st.write("No Scanned Data:")
+   st.write("No Scanned Data:")
 
 
 # if data:
