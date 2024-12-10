@@ -76,7 +76,7 @@ if data:
          st.pyplot(fig)
          ax.set_xlim(x_min, x_max)
          ax.set_ylim(y_min, y_max)
-         ax.tick_params(axis='x', colors=''white'')  # x축 눈금 및 레이블 색상
+         ax.tick_params(axis='x', colors='white')  # x축 눈금 및 레이블 색상
          ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
          ax.grid(color='white', linestyle='--', linewidth=0.5)
          st.pyplot(fig)
