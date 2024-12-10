@@ -54,7 +54,7 @@ if data:
    
    # wavelength 데이터를 x축으로 사용
    wavelength = data['wavelength']
-   del data['wavelength']]
+   del data['wavelength']
    selected_wells = [well for well in data.keys()
                   if well != 'wavelength' & st.sidebar.checkbox(well, False)]
 
