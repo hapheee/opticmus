@@ -31,15 +31,15 @@ st.write(
 Streamlit. We're generating a bunch of random numbers in a loop for around
 5 seconds. Enjoy!"""
 )
-st.set_page_config(page_title="Mapping Demo", page_icon="🌍")
+# st.set_page_config(page_title="Mapping Demo", page_icon="🌍")
  
-st.markdown("# Mapping Demo")
-st.sidebar.header("Mapping Demo")
-st.write(
-    """This demo shows how to use
-[`st.pydeck_chart`](https://docs.streamlit.io/develop/api-reference/charts/st.pydeck_chart)
-to display geospatial data."""
-)
+# st.markdown("# Mapping Demo")
+# st.sidebar.header("Mapping Demo")
+# st.write(
+#     """This demo shows how to use
+# [`st.pydeck_chart`](https://docs.streamlit.io/develop/api-reference/charts/st.pydeck_chart)
+# to display geospatial data."""
+# )
  
 # # Firebase 데이터 가져오기
 # while True:
