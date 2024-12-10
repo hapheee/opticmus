@@ -35,11 +35,11 @@ menu = st.sidebar.radio("Menu", ["Welcome", "PLOT", "Datas"])
 #    else:
 #       pass
 
-data = get_data_from_firebase()
-if data:
-   latest_key = list(data.keys()) # Assume keys are numeric or lexicographically sorted
+# data = get_data_from_firebase()
+# if data:
+#    latest_key = list(data.keys()) # Assume keys are numeric or lexicographically sorted
 
-   st.write(data[latest_key[0]])
+#    st.write(data[latest_key[0]])
 
 # if data:
 #    st.write("Firebase에서 가져온 데이터:")
