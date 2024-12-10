@@ -64,39 +64,25 @@ if data:
    y_min = st.sidebar.number_input("Y-axis Min:", min_value=0, max_value=70000, value=0, step=2000)
    y_max = st.sidebar.number_input("Y-axis Max:", min_value=0, max_value=70000, value=10000, step=2000)
 
-       # 색상 설정
-   colors = plt.cm.get_cmap("tab10", len(selected_wells))  # 색상 팔레트 사용
-
-    # 선택된 wells를 플로팅
    if selected_wells:
-      plot_data = pd.DataFrame(wavelength)
-      for i, key in enumerate(selected_wells):
-         plot_data[key] = data[key]
-      # Plotting using Streamlit line_chart
-      st.line_chart(plot_data.set_index('Wavelength'))
-        
+      fig, ax = plt.subplots(figsize=(10, 6))
+      fig.patch.set_facecolor('black')
+      colors = plt.cm.get_cmap('tab10', len(selected_wells))
+      for key in selected_wells:
+         ax.plot(wavelength, data[key], marker="o", label=key, linewidth=3)
+         ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
+         ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
+         ax.legend(title=f"{key} well")
+         st.pyplot(fig)
+         ax.set_xlim(x_min, x_max)
+         ax.set_ylim(y_min, y_max)
+         ax.tick_params(axis='x', colors='wthie')  # x축 눈금 및 레이블 색상
+         ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
+         ax.grid(color='white', linestyle='--', linewidth=0.5)
+         st.pyplot(fig)
+
    else:
       st.write("No wells selected for plotting.")
-      empty_df = pd.DataFrame({"Wavelength": np.arange(900, 1700, 10)})
-      st.line_chart(empty_df.set_index('Wavelength'))
-   # if selected_wells:
-   #    plot_data = pd.DataFrame(wavelength)
-      
-   #    fig, ax = plt.subplots(figsize=(10, 6))
-   #    for key in selected_wells:
-   #       ax.plot(wavelength, data[key], marker="o", label=key, linewidth=3)
-   #       ax.set_xlabel("Wavelength (nm)", color="black")  # x축 라벨
-   #       ax.set_ylabel("Fluorescence intensity", color="black")  # y축 라벨
-   #       ax.legend(title=f"{key} well")
-   #       st.pyplot(fig)
-   #       ax.set_xlim(x_min, x_max)
-   #       ax.set_ylim(y_min, y_max)
-   #       ax.tick_params(axis='x', colors='black')  # x축 눈금 및 레이블 색상
-   #       ax.tick_params(axis='y', colors='black')  # y축 눈금 및 레이블 색상
-   #       ax.grid(color='gray', linestyle='--', linewidth=0.5)
-
-   # else:
-   #    st.write("No wells selected for plotting.")
    
 else:
    st.write("No Scanned Data:")
