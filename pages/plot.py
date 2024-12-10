@@ -52,7 +52,7 @@ while True:
 # data = get_data_from_firebase()
 if data:
    latest_key = list(data.keys()) # Assume keys are numeric or lexicographically sorted
-   st.writd(2)
+   st.write(2)
    st.write(data[latest_key[0]])
 
 # if data:
