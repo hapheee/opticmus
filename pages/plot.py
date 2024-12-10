@@ -58,17 +58,16 @@ if data:
    selected_wells = [well for well in data.keys()
                   if well != 'wavelength' & st.sidebar.checkbox(well, False)]
 
-    if selected_wells:
-        fig, ax = plt.subplots()
-        for key in selected_wells:
-            ax.plot(wavelength, data[key], marker="o", label=key)
-        
-        ax.set_xlabel("Wavelength (nm)")
-        ax.set_ylabel("Intensity")
-        ax.legend(title=f"{key}")
-        st.pyplot(fig)
-    else:
-        st.write("No wells selected for plotting.")
+   if selected_wells:
+      fig, ax = plt.subplots()
+      for key in selected_wells:
+         ax.plot(wavelength, data[key], marker="o", label=key)
+         ax.set_xlabel("Wavelength (nm)")
+         ax.set_ylabel("Intensity")
+         ax.legend(title=f"{key}")
+         st.pyplot(fig)
+   else:
+      st.write("No wells selected for plotting.")
 else:
    st.write("No Scanned Data:")
 
