@@ -24,6 +24,20 @@ def get_data_from_firebase():
     ref = db.reference('plate_reader_data')  # firebase에 저장해둔 경로 
     data = ref.get()  # 데이터 가져오기
     return data
+   
+def listen_to_firebase_updates():
+    ref = db.reference('plate_reader_data')
+    def callback(event):
+        # Firebase에서 데이터가 업데이트 되면 실행되는 콜백 함수
+        if event.event_type == 'put':  # 데이터가 업데이트되면
+            st.experimental_rerun()  # 페이지를 자동으로 리렌더링
+
+    # Firebase 실시간 데이터 변경 감지
+    ref.listen(callback)
+
+# 실시간 업데이트 감지 스레드 실행(background 실행 허용-daemin, 메인 종료되면 자동 종료)
+firebase_thread = threading.Thread(target=listen_to_firebase_updates, daemon=True)
+firebase_thread.start()
 
 # Streamlit에서 Firebase 데이터 표시
 st.set_page_config(page_title="Plate Reader Data", layout="wide", page_icon="📈")
