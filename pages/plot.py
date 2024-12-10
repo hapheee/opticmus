@@ -28,7 +28,6 @@ def get_data_from_firebase():
 # Streamlit에서 Firebase 데이터 표시
 st.set_page_config(page_title="Plate Reader Data", layout="wide", page_icon="📈")
 st.markdown("# Plotting Demo")
-st.sidebar.header("Plotting Demo")
 st.write(
     """This demo illustrates a combination of plotting and animation with
 Streamlit. We're generating a bunch of random numbers in a loop for around
@@ -36,10 +35,8 @@ Streamlit. We're generating a bunch of random numbers in a loop for around
 )
 
 progress_bar = st.sidebar.progress(0)
-status_text = st.sidebar.empty()
 
 st.button("Re-run")
-st.sidebar.header('Plot data')
 st.sidebar.markdown('### Select wells')
 
 # Firebase 데이터 가져오기
@@ -53,16 +50,14 @@ if data:
    del data['wavelength']
    
    df = pd.DataFrame(data) 
-   df.insert(0, 'Wavelength', wavelength)
-   st.dataframe(df)
-
-   selected_wells = [well for well in data.keys()
-                  if  st.sidebar.checkbox(well, False)]
 
    x_min = st.sidebar.number_input("X-axis Min:", min_value=0, max_value=1700, value=900, step=10)
    x_max = st.sidebar.number_input("X-axis Max:", min_value=0, max_value=1700, value=1700, step=10)
    y_min = st.sidebar.number_input("Y-axis Min:", min_value=0, max_value=70000, value=0, step=1000)
    y_max = st.sidebar.number_input("Y-axis Max:", min_value=0, max_value=70000, value=10000, step=5000)
+
+   selected_wells = [well for well in data.keys()
+                  if  st.sidebar.checkbox(well, False)]
 
    fig, ax = plt.subplots(figsize=(10, 6))
    fig.patch.set_facecolor('#0E1117')  # 전체 배경을 어두운 색으로 설정
@@ -82,6 +77,9 @@ if data:
          ax.plot(wavelength, data[key], label=key, linewidth=1)
       ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
    st.pyplot(fig)
+
+   df.insert(0, 'Wavelength', wavelength)
+   st.dataframe(df)
 
 else:
    st.write("No Scanned Data:")
