@@ -45,7 +45,6 @@ data = get_data_from_firebase()
 if data:
    #st.write("Firebase에서 가져온 데이터:")
    #st.write(data)  
-   st.write("All Scanned Data:")
    wavelength = data['wavelength']
    del data['wavelength']
    
@@ -78,6 +77,7 @@ if data:
       ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
    st.pyplot(fig)
 
+   st.write("All Scanned Data:")
    df.insert(0, 'Wavelength', wavelength)
    st.dataframe(df)
 
