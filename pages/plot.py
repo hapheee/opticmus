@@ -66,29 +66,27 @@ if data:
 
    fig, ax = plt.subplots(figsize=(10, 6))
    if selected_wells:
-      fig.patch.set_facecolor('black')  # 전체 배경을 어두운 색으로 설정
-      ax.set_facecolor('black')         # 플롯 배경을 어두운 색으로 설정
+      fig.patch.set_facecolor('#0E1117')  # 전체 배경을 어두운 색으로 설정
+      ax.set_facecolor('#0E1117')         # 플롯 배경을 어두운 색으로 설정
       
       for key in selected_wells:
          ax.plot(wavelength, data[key], label=key, linewidth=1)
       ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
       ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
-      ax.legend(title="Wells", facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
+      ax.legend(title="Wells", facecolor='white', edgecolor='white', labelcolor='white')
       ax.set_xlim(x_min, x_max)
       ax.set_ylim(y_min, y_max)
       ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
-      ax.grid(color='white', linestyle='--', linewidth=0.5)
    
    else:
-      fig.patch.set_facecolor('black')  # 전체 배경을 어두운 색으로 설정
-      ax.set_facecolor('black')         # 플롯 배경을 어두운 색으로 설정
+      fig.patch.set_facecolor('#0E1117')  # 전체 배경을 어두운 색으로 설정
+      ax.set_facecolor('#0E1117')         # 플롯 배경을 어두운 색으로 설정
       ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
       ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
       ax.set_xlim(x_min, x_max)
       ax.set_ylim(y_min, y_max)
-      ax.legend(title="Wells", facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
+      ax.legend(title="Wells", facecolor='white', edgecolor='white', labelcolor='white')
       ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
-      ax.grid(color='white', linestyle='--', linewidth=0.5)
    st.pyplot(fig)
 
 else:
