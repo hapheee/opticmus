@@ -24,7 +24,23 @@ def get_data_from_firebase():
 
 # Streamlit에서 Firebase 데이터 표시
 st.set_page_config(page_title="Plate Reader Data", layout="wide", page_icon="📈")
-
+st.markdown("# Plotting Demo")
+st.sidebar.header("Plotting Demo")
+st.write(
+    """This demo illustrates a combination of plotting and animation with
+Streamlit. We're generating a bunch of random numbers in a loop for around
+5 seconds. Enjoy!"""
+)
+st.set_page_config(page_title="Mapping Demo", page_icon="🌍")
+ 
+st.markdown("# Mapping Demo")
+st.sidebar.header("Mapping Demo")
+st.write(
+    """This demo shows how to use
+[`st.pydeck_chart`](https://docs.streamlit.io/develop/api-reference/charts/st.pydeck_chart)
+to display geospatial data."""
+)
+ 
 # # Firebase 데이터 가져오기
 # while True:
 #    data = get_data_from_firebase()
