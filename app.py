@@ -1,41 +1,38 @@
-# import streamlit as st
-# import firebase_admin
-# from firebase_admin import credentials, db
-# import base64
-# import json
-
-# # Streamlit에서 secrets 파일에 저장된 firebase_key를 가져오기
-# encoded_firebase_key = st.secrets["firebase_key"]
-# decoded_firebase_key = base64.b64decode(encoded_firebase_key)
-# firebase_key = json.loads(decoded_firebase_key)
-
-# # Initialize 
-# if not firebase_admin._apps:
-#    cred = credentials.Certificate(firebase_key)
-#    firebase_admin.initialize_app(cred, {           
-#            'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
-#         })
-   
-# # Firebase에서 데이터 가져오기
-# def get_data_from_firebase():
-#     ref = db.reference('plate_reader_data')  # firebase에 저장해둔 경로 
-#     data = ref.get()  # 데이터 가져오기
-#     return data
-
-# # Streamlit에서 Firebase 데이터 표시
-# st.set_page_config(page_title="Plate Reader Data", layout="wide", page_icon="📈")
-# st.markdown("# Plotting Demo")
-# st.sidebar.header("Plotting Demo")
-# st.write(
-#     """This demo illustrates a combination of plotting and animation with
-# Streamlit. We're generating a bunch of random numbers in a loop for around
-# 5 seconds. Enjoy!"""
-# )
 import streamlit as st
+import firebase_admin
+from firebase_admin import credentials, db
+import base64
+import json
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import time
+
+# Streamlit에서 secrets 파일에 저장된 firebase_key를 가져오기
+encoded_firebase_key = st.secrets["firebase_key"]
+decoded_firebase_key = base64.b64decode(encoded_firebase_key)
+firebase_key = json.loads(decoded_firebase_key)
+
+# Initialize
+if not firebase_admin._apps:
+    cred = credentials.Certificate(firebase_key)
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': 'https://opticmus-8f21c-default-rtdb.firebaseio.com/'
+    })
+
+# 'parameter' path 데이터 get
+def get_data_from_firebase():
+    ref = db.reference('parameter')
+    return ref.get()
+
+data = get_data_from_firebase()
+exposure_time = float(data['exposure_time'])/(10**6) # s
+linearity = data['linearity']
+trigger = data['trigger']
+trigger_mode = {0: 'Free running', 3: 'Edge Trigger'}
 
 st.set_page_config(page_title="Plate Reader App", layout="wide")
-
-st.title("Welcome to the Plate Reader App")
+st.title("# Welcome to OPTICMUS Plate Redaer App! 👋")
 st.markdown(
     """
     **Navigation**: Use the menu on the left to explore the app's features.
@@ -44,49 +41,14 @@ st.markdown(
     - **Datas**: View all the data in a tabular format.
     """
 )
-# st.sidebar.page_link("pages/1_update.py")
-# st.sidebar.page_link("pages/2_plot.py")
 
-# add_selectbox = st.sidebar.selectbox(
-#     "How would you like to be contacted?",
-#     ("Email", "Home phone", "Mobile phone")
-# )
-
-# # Using "with" notation
-# with st.sidebar:
-#     add_radio = st.radio(
-#         "Choose a shipping method",
-#         ("Standard (5-15 days)", "Express (2-5 days)")
-#     )
+col1, col2, col3 = st.columns(3)        #st.columns([2, 1, 1]) 작성하면 각 열 별 너비를 지정
+col1.metric('exposure time', f'{exposure_time}s', '1.5°C')
+col2.metric('tirgger mode', trigger_mode[trigger], '-3%')
+col3.metric('linearity correction', linearity, '-5%')
+input_image = st.file_uploader(" **01. 의류 이미지를 업로드하세요. (배경이 깔끔한 사진이라면 더 좋습니다!)** ", type=['png', 'jpg', 'jpeg'])
+st.markdown('--------------------------------------------------------------------------------------')
 
 
-# st.set_page_config(page_title="Mapping Demo", page_icon="🌍")
- 
-# st.markdown("# Mapping Demo")
-# st.sidebar.header("Mapping Demo")
-# st.write(
-#     """This demo shows how to use
-# [`st.pydeck_chart`](https://docs.streamlit.io/develop/api-reference/charts/st.pydeck_chart)
-# to display geospatial data."""
-# )
- 
-# # Firebase 데이터 가져오기
-# while True:
-#    data = get_data_from_firebase()
-#    if data:
-#       st.write("Firebase에서 가져온 데이터:")
-#       st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
-#    else:
-#       pass
+st.balloons()
 
-# data = get_data_from_firebase()
-# if data:
-#    latest_key = list(data.keys()) # Assume keys are numeric or lexicographically sorted
-
-#    st.write(data[latest_key[0]])
-
-# if data:
-#    st.write("Firebase에서 가져온 데이터:")
-#    st.write(data)  # 데이터가 있으면 JSON 형태로 띄움
-# else:
-#    pass
