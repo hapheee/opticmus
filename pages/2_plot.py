@@ -36,14 +36,16 @@ st.write(
 st.button("Re-run")
 x_min, x_max = st.sidebar.slider("Select X-axis range:", 900, 1700, value=(900, 1700), step=10)
 y_min, y_max = st.sidebar.slider("Select Y-axis range:", 0, 70000, value=(0, 10000), step=1000)
-
+graph_placeholder = st.empty()
 # Firebase 데이터 가져오기
 data = get_data_from_firebase()
 if data:
    wavelength = data['wavelength']
    del data['wavelength']
    df = pd.DataFrame(data)
-  
+   df.insert(0, 'Wavelength', wavelength)
+   st.dataframe(df)
+
    selected_wells = [well for well in data.keys()
                            if  st.sidebar.checkbox(well, False)]
    fig, ax = plt.subplots(figsize=(10, 6))
@@ -52,26 +54,23 @@ if data:
    ax.set_xlabel("Wavelength (nm)", color="white")  # x축 라벨
    ax.set_ylabel("Fluorescence intensity", color="white")  # y축 라벨
    ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-   ax.set_xlim(900, 1700)
-   ax.set_ylim(0, 10000)
-   ax.set_yticks(np.arange(0, 10000, 10000/10))
+   ax.set_xlim(x_min, x_max)
+   ax.set_ylim(y_min, y_max)
+   ax.set_yticks(np.arange(y_min, y_max, int(y_max/10)))
    ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
    ax.tick_params(axis='x', colors='white')
    ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
+   graph_placeholder.pyplot(fig)
+
 
    if selected_wells:
       for key in selected_wells:
          ax.plot(wavelength, data[key], label=key, linewidth=1)
       ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-      st.pyplot(fig)
-      st.write("All Scanned Data:")
-      df.insert(0, 'Wavelength', wavelength)
-      st.dataframe(df)
+      graph_placeholder.pyplot(fig)
    else:
       pass
-   st.pyplot(fig)
-   df.insert(0, 'Wavelength', wavelength)
-   st.dataframe(df)
+      
 
 
 
