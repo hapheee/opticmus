@@ -26,11 +26,6 @@ def get_data_from_firebase():
     return ref.get()
 
 
-# Initialize Streamlit sessions state
-if "previous_data" not in st.session_state:
-    st.session_state.previous_data = {}
-
-
 # MultiPage: plot page
 st.set_page_config(page_title="Real Time Plate Reader Data Visualization", layout="wide")
 st.markdown("# Plot Plate Reader Data")
@@ -58,6 +53,10 @@ ax.tick_params(axis='x', colors='white')
 ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
 st.pyplot(fig)
 
+# Initialize Streamlit sessions state
+if "previous_data" not in st.session_state:
+    st.session_state.previous_data = {}
+
 # Get data and Chck updated Data
 def get_new_data():
     data = get_data_from_firebase()
@@ -65,7 +64,9 @@ def get_new_data():
         new_data = {}
         for key, value in data.items():
             if key not in st.session_state.previous_data:
+                
                 new_data[key] = value
+                st.write(new_data)
             if 'wavelength' in new_data.keys():
                 st.write(1)
                 global wavelength
