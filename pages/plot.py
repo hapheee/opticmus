@@ -64,13 +64,13 @@ def get_new_data():
         new_data = {}
         for key, value in data.items():
             if key not in st.session_state.previous_data:
-                
                 new_data[key] = value
-                st.write(new_data)
             if 'wavelength' in new_data.keys():
                 st.write(1)
                 global wavelength
+                st.write(1)
                 st.write(wavelength)
+                st.write(1)
                 wavelength = new_data['wavelength']
                 del new_data['wavelength']
                 line.set_xdata(wavelength)
