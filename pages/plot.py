@@ -81,10 +81,12 @@ def get_new_data():
     
 data_placeholder = st.empty()
 message_placeholder = st.empty()
-
+count =  0
 while True:
+    count += 1
     new_data = get_new_data()
     if new_data:
+        st.write(count)
         df = pd.DataFrame(new_data)
         df.insert(0, 'Wavelength', wavelength)
         data_placeholder.dataframe(df)  # 동일 위치에 데이터프레임 갱신
