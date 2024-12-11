@@ -57,15 +57,11 @@ ax.tick_params(axis='x', colors='white')
 ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
 graph_placeholder.pyplot(fig) 
 
-# Wait until new process start(it means 'database clear') 
-while True:
-    data = get_data_from_firebase()
-    if not data:
-        break
-        
+
 # Initialize Streamlit sessions state
 if "previous_data" not in st.session_state:
     st.session_state.previous_data = {}
+    st.write('2')
 
 # Get data and Chck updated Data
 def get_new_data():
