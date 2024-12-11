@@ -76,13 +76,11 @@ def get_new_data():
         st.session_state.previous_data = data  # update state
         return new_data
     return {}
-    
-count = 0
+
+
 while True:
-    st.write(count)
     new_data = get_new_data()
     if new_data:
-        st.write('ok')
         df = pd.DataFrame(new_data)
         df.insert(0, 'Wavelength', wavelength)
         data_placeholder.dataframe(df)  
