@@ -52,5 +52,6 @@ image_url = 'plate.png'
 # st.image(image_url, width=900)
 # st.markdown('--------------------------------------------------------------------------------------')
 
-st.balloons()
+#st.balloons()
+st.snow()
 
