@@ -44,6 +44,7 @@ def get_new_data():
                 global wavelength
                 global line
                 global ax
+                global fig
                 wavelength = new_data['wavelength']
                 del new_data['wavelength']
                 fig, ax = plt.subplots(figsize=(10, 6))
@@ -90,8 +91,12 @@ while True:
 
         for key, value in new_data:
             line.set_ydata(value)  # Update y data
+            ax.set_xlim(x_min, x_max)
+            ax.set_ylim(y_min, y_max)
+            ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
             ax.set_title(f"Intensity for Well {key}", fontsize=15, color="white", fontweight='bold')
             ax.plot(wavelength, value, label=key, linewidth=1)
+            fig.canvas.draw()
 
     else:
         message_placeholder.write("No New Data")
