@@ -82,9 +82,10 @@ while True:
     st.write(count)
     new_data = get_new_data()
     if new_data:
+        st.write('ok')
         df = pd.DataFrame(new_data)
         df.insert(0, 'Wavelength', wavelength)
-        data_placeholder.dataframe(df)  # 동일 위치에 데이터프레임 갱신
+        data_placeholder.dataframe(df)  
         for key, value in new_data.items():
             try:         
                 line.set_xdata(wavelength) 
