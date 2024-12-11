@@ -54,8 +54,8 @@ st.write(
 )
 
 st.button("Re-run")
-x_min, x_max = st.sidebar.slider("Select X-axis range:", 900, 1700, 10, value=(900, 1700))
-y_min, y_max = st.sidebar.slider("Select Y-axis range:", 0, 70000, 1000, value=(0, 10000))
+x_min, x_max = st.sidebar.slider("Select X-axis range:", 900, 1700, value=(900, 1700), 10)
+y_min, y_max = st.sidebar.slider("Select Y-axis range:", 0, 70000, value=(0, 10000), 1000)
 
 
 while True:
