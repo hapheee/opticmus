@@ -42,26 +42,10 @@ def get_new_data():
                 new_data[key] = value
             if 'wavelength' in new_data.keys():
                 global wavelength
-                global line
-                global ax
-                global fig
                 wavelength = new_data['wavelength']
                 del new_data['wavelength']
-                fig, ax = plt.subplots(figsize=(10, 6))
-                line = ax.plot([], [], color='orange')
-                fig.patch.set_facecolor('#0E1117')
-                ax.set_facecolor('#0E1117')
-                ax.set_xlabel("Wavelength (nm)", color="white")
-                ax.set_ylabel("Fluorescence intensity", color="white")
-                ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-                ax.set_xlim(x_min, x_max)
-                ax.set_ylim(y_min, y_max)
-                ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
-                ax.tick_params(axis='y', colors='white')
-                ax.tick_params(axis='x', colors='white')
-                ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
                 line.set_xdata(wavelength)
-                st.pyplot(fig)
+                fig.canvas.draw()
         st.session_state.previous_data = data  # update state
         return new_data
     return {}
@@ -78,6 +62,21 @@ st.write(
 st.button("Re-run")
 x_min, x_max = st.sidebar.slider("Select X-axis range:", 900, 1700, value=(900, 1700), step=10)
 y_min, y_max = st.sidebar.slider("Select Y-axis range:", 0, 70000, value=(0, 10000), step=1000)
+
+fig, ax = plt.subplots(figsize=(10, 6))
+line = ax.plot([], [], color='orange')
+fig.patch.set_facecolor('#0E1117')
+ax.set_facecolor('#0E1117')
+ax.set_xlabel("Wavelength (nm)", color="white")
+ax.set_ylabel("Fluorescence intensity", color="white")
+ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
+ax.set_xlim(x_min, x_max)
+ax.set_ylim(y_min, y_max)
+ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
+ax.tick_params(axis='y', colors='white')
+ax.tick_params(axis='x', colors='white')
+ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
+st.pyplot(fig)
 
 data_placeholder = st.empty()
 message_placeholder = st.empty()
