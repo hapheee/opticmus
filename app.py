@@ -32,7 +32,7 @@ trigger = data['trigger']
 trigger_mode = {0: 'Free running', 3: 'Edge Trigger'}
 
 st.set_page_config(page_title="Plate Reader App", layout="wide")
-st.title("# Welcome to OPTICMUS Plate Redaer App! 👋")
+st.title("*Welcome to OPTICMUS Plate Redaer App! 👋")
 st.markdown(
     """
     **Navigation**: Use the menu on the left to explore the app's features.
