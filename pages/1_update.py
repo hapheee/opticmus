@@ -66,7 +66,6 @@ while True:
 # Initialize Streamlit sessions state
 if "previous_data" not in st.session_state:
     st.session_state.previous_data = {}
-    st.write(1)
 
 # Get data and Chck updated Data
 def get_new_data():
@@ -77,7 +76,6 @@ def get_new_data():
             
             if key not in st.session_state.previous_data:
                 new_data[key] = value
-            st.write(new_data)
             if 'wavelength' in new_data.keys():
                 global wavelength
                 wavelength = new_data['wavelength']
@@ -89,7 +87,7 @@ def get_new_data():
 
 while True:
     new_data = get_new_data()
-    if new_data:
+    if new_data
         df = pd.DataFrame(new_data)
         df.insert(0, 'Wavelength', wavelength)
         data_placeholder.dataframe(df)  
