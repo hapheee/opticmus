@@ -80,11 +80,11 @@ def get_new_data():
 while True:
     new_data = get_new_data()
     if new_data:
+        st.write(1)
         wavelength = new_data['wavelength']
         del new_data['wavelength']
         df = pd.DataFrame(new_data)
         df.insert(0, 'Wavelength', wavelength)
-        current_df = df 
         data_placeholder.dataframe(df)  
         
         for key, value in new_data.items():
@@ -100,7 +100,5 @@ while True:
             except Exception as e:
                 st.write(f"update fail: {e}")
     else:
-        if current_df is not None:
-            data_placeholder.dataframe(current_df)  
-
+        st.write(3)
     time.sleep(1)
