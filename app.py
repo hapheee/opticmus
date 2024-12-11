@@ -31,7 +31,8 @@ linearity = data['linearity']
 trigger = data['trigger']
 trigger_mode = {0: 'Free running', 3: 'Edge Trigger'}
 
-st.set_page_config(page_title="Plate Reader App", layout="wide")
+
+st.set_page_config(page_title="Plate Reader App", layout="wide", page_icon="👋")
 st.title("Welcome to OPTICMUS Plate Redaer App! 👋")
 st.markdown(
     """
