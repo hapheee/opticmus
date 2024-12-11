@@ -65,11 +65,5 @@ if data:
       for key in selected_wells:
          ax.plot(wavelength, data[key], label=key, linewidth=1)
       ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-      st.pyplot(fig)
-   else:
-      pass
-      
-
-
-
+   st.pyplot(fig)
 
