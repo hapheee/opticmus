@@ -31,25 +31,6 @@ if "previous_data" not in st.session_state:
     st.session_state.previous_data = {}
 
 
-# Get data and Chck updated Data
-def get_new_data():
-    data = get_data_from_firebase()
-    if data:
-        new_data = {}
-        for key, value in data.items():
-            if key not in st.session_state.previous_data:
-                new_data[key] = value
-            if 'wavelength' in new_data.keys():
-                global wavelength
-                wavelength = new_data['wavelength']
-                del new_data['wavelength']
-                line.set_xdata(wavelength)
-                fig.canvas.draw()
-        st.session_state.previous_data = data  # update state
-        return new_data
-    return {}
-
-
 # MultiPage: plot page
 st.set_page_config(page_title="Real Time Plate Reader Data Visualization", layout="wide")
 st.markdown("# Plot Plate Reader Data")
@@ -77,6 +58,25 @@ ax.tick_params(axis='x', colors='white')
 ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
 st.pyplot(fig)
 
+# Get data and Chck updated Data
+def get_new_data():
+    data = get_data_from_firebase()
+    if data:
+        new_data = {}
+        for key, value in data.items():
+            if key not in st.session_state.previous_data:
+                new_data[key] = value
+            if 'wavelength' in new_data.keys():
+                
+                global wavelength
+                wavelength = new_data['wavelength']
+                del new_data['wavelength']
+                line.set_xdata(wavelength)
+                fig.canvas.draw()
+        st.session_state.previous_data = data  # update state
+        return new_data
+    return {}
+    
 data_placeholder = st.empty()
 message_placeholder = st.empty()
 
