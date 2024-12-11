@@ -42,17 +42,15 @@ st.markdown(
     """
 )
 
-col1, col2, col3 = st.columns(3)        #st.columns([2, 1, 1]) 작성하면 각 열 별 너비를 지정
-col1.metric('exposure time', f'{exposure_time}s', '1.5°C')
-col2.metric('tirgger mode', trigger_mode[trigger], '-3%')
-col3.metric('linearity correction', linearity, '-5%')
+col1, col2, col3 = st.columns(3)        
+col1.metric('exposure time', f'{exposure_time}s', 'from 1s to 1600s')
+col2.metric('tirgger mode', trigger_mode[trigger], 'Free running or Edge Trigger')
+col3.metric('linearity correction', linearity, 'Ture or False')
 
 
 image_url = 'plate.png'
 # st.image(image_url, width=900)
 # st.markdown('--------------------------------------------------------------------------------------')
-
-
 
 st.balloons()
 
