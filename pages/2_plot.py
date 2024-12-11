@@ -60,8 +60,6 @@ if data:
    ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
    ax.tick_params(axis='x', colors='white')
    ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
-   st.pyplot(fig)
-
 
    if selected_wells:
       for key in selected_wells:
