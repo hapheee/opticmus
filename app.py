@@ -44,8 +44,8 @@ st.markdown(
     - **Datas**: View all the data in a tabular format.
     """
 )
-st.sidebar.page_link("pages/1_update.py")
-st.sidebar.page_link("pages/2_plot.py")
+# st.sidebar.page_link("pages/1_update.py")
+# st.sidebar.page_link("pages/2_plot.py")
 
 # add_selectbox = st.sidebar.selectbox(
 #     "How would you like to be contacted?",
