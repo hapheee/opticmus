@@ -78,8 +78,7 @@ def get_new_data():
 
 while True:
     new_data = get_new_data()
-    if new_data:
-        st.write(1,new_data)
+    if len(new_data) > 1:
         wavelength = new_data['wavelength']
         del new_data['wavelength']
         df = pd.DataFrame(new_data)
@@ -99,5 +98,5 @@ while True:
             except Exception as e:
                 st.write(f"update fail: {e}")
     else:
-        st.write(3)
+        pass
     time.sleep(1)
