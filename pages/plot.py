@@ -80,6 +80,7 @@ st.pyplot(fig)
 
 data_placeholder = st.empty()
 message_placeholder = st.empty()
+
 while True:
     new_data = get_new_data()
     if new_data:
@@ -89,6 +90,7 @@ while True:
         data_placeholder.dataframe(df)  # 동일 위치에 데이터프레임 갱신
 
         for key, value in new_data:
+            line.set_xdata(wavelength) 
             line.set_ydata(value)  # Update y data
             ax.set_xlim(x_min, x_max)
             ax.set_ylim(y_min, y_max)
