@@ -67,8 +67,8 @@ def get_new_data():
             if key not in st.session_state.previous_data:
                 new_data[key] = value
             if 'wavelength' in new_data.keys():
-                
                 global wavelength
+                st.write(wavelength)
                 wavelength = new_data['wavelength']
                 del new_data['wavelength']
                 line.set_xdata(wavelength)
