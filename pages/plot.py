@@ -69,14 +69,6 @@ def get_new_data():
                 global wavelength
                 wavelength = new_data['wavelength']
                 del new_data['wavelength']
-                try:
-                    line.set_xdata(wavelength)
-                    fig.canvas.draw()
-                    
-                except Exception as e:
-                    st.write(len(wavelength))
-                    st.write(f"update fail: {e}")
-
         st.session_state.previous_data = data  # update state
         return new_data
     return {}
@@ -94,12 +86,22 @@ while True:
         data_placeholder.dataframe(df)  # 동일 위치에 데이터프레임 갱신
 
         for key, value in new_data:
-            line.set_xdata(wavelength) 
-            line.set_ydata(value)  # Update y data
-            ax.set_xlim(x_min, x_max)
-            ax.set_ylim(y_min, y_max)
-            ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
-            ax.set_title(f"Intensity for Well {key}", fontsize=15, color="white", fontweight='bold')
-            ax.plot(wavelength, value, label=key, linewidth=1)
-            fig.canvas.draw()
+                            try:
+                    line.set_xdata(wavelength)
+                    fig.canvas.draw()
+                    
+                except Exception as e:
+                    st.write(len(wavelength))
+                    st.write(f"update fail: {e}")
+            try:         
+                line.set_xdata(wavelength) 
+                line.set_ydata(value)  # Update y data
+                ax.set_xlim(x_min, x_max)
+                ax.set_ylim(y_min, y_max)
+                ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
+                ax.set_title(f"Intensity for Well {key}", fontsize=15, color="white", fontweight='bold')
+                ax.plot(wavelength, value, label=key, linewidth=1)
+                fig.canvas.draw()
+            except Exception as e:
+                st.write(f"update fail: {e}")
     time.sleep(2)
