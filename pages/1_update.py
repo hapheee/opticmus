@@ -68,7 +68,7 @@ def get_new_data():
     if data:
         new_data = {}
         if new_data.keys() ==  st.session_state.previous_data:
-            return False
+            return {}
         for key, value in data.items():
             if key not in st.session_state.previous_data or key == 'wavelength':
                 new_data[key] = value
