@@ -38,7 +38,6 @@ graph_placeholder = st.empty()
 data_placeholder = st.empty()
 message_placeholder = st.empty()
 
-st.button("Re-run")
 x_min, x_max = st.sidebar.slider("Select X-axis range:", 900, 1700, value=(900, 1700), step=10)
 y_min, y_max = st.sidebar.slider("Select Y-axis range:", 0, 70000, value=(0, 10000), step=1000)
 
@@ -69,13 +68,8 @@ def get_new_data():
     if data:
         new_data = {}
         for key, value in data.items():
-            
-            if key not in st.session_state.previous_data:
+            if key not in st.session_state.previous_data or key == 'wavelength':
                 new_data[key] = value
-            if 'wavelength' in new_data.keys():
-                global wavelength
-                wavelength = new_data['wavelength']
-                del new_data['wavelength']
         st.session_state.previous_data = data  # update state
         return new_data
     return {}
@@ -84,6 +78,8 @@ def get_new_data():
 while True:
     new_data = get_new_data()
     if new_data:
+        wavelength = new_data['wavelength']
+        del new_data['wavelength']
         df = pd.DataFrame(new_data)
         try:
             df.insert(0, 'Wavelength', wavelength)
