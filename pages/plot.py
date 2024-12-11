@@ -39,7 +39,7 @@ x_min, x_max = st.sidebar.slider("Select X-axis range:", 900, 1700, value=(900, 
 y_min, y_max = st.sidebar.slider("Select Y-axis range:", 0, 70000, value=(0, 10000), step=1000)
 
 fig, ax = plt.subplots(figsize=(10, 6))
-line = ax.plot([], [], color='orange')
+line, = ax.plot([], [], color='orange')
 fig.patch.set_facecolor('#0E1117')
 ax.set_facecolor('#0E1117')
 ax.set_xlabel("Wavelength (nm)", color="white")
