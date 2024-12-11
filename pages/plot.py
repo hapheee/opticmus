@@ -34,6 +34,10 @@ st.write(
      In the sidebar, you can select the range of the graph axis and the well you want to plot."""
 )
 
+graph_placeholder = st.empty() 
+data_placeholder = st.empty()
+message_placeholder = st.empty()
+
 st.button("Re-run")
 x_min, x_max = st.sidebar.slider("Select X-axis range:", 900, 1700, value=(900, 1700), step=10)
 y_min, y_max = st.sidebar.slider("Select Y-axis range:", 0, 70000, value=(0, 10000), step=1000)
@@ -51,7 +55,7 @@ ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
 ax.tick_params(axis='y', colors='white')
 ax.tick_params(axis='x', colors='white')
 ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
-st.pyplot(fig)
+graph_placeholder.pyplot(fig) 
 
 # Initialize Streamlit sessions state
 if "previous_data" not in st.session_state:
@@ -73,8 +77,7 @@ def get_new_data():
         return new_data
     return {}
     
-data_placeholder = st.empty()
-message_placeholder = st.empty()
+
 while True:
     new_data = get_new_data()
     if new_data:
@@ -91,6 +94,7 @@ while True:
                 ax.set_title(f"Intensity for Well {key}", fontsize=15, color="white", fontweight='bold')
                 ax.plot(wavelength, value, label=key, linewidth=1)
                 fig.canvas.draw()
+                graph_placeholder.pyplot(fig) 
                 st.write(1)
             except Exception as e:
                 st.write(f"update fail: {e}")
