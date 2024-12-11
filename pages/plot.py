@@ -1,3 +1,4 @@
+
 import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, db
@@ -35,13 +36,33 @@ if "previous_data" not in st.session_state:
 def get_new_data():
     data = get_data_from_firebase()
     if data:
-        wavelength = data['wavelength']
         new_data = {}
         for key, value in data.items():
-            if key not in st.session_state.previous_data and  key != 'wavelength':
+            if key not in st.session_state.previous_data:
                 new_data[key] = value
-        st.session_state.previous_data = data # update stae
-        return wavelength, new_data
+            if 'wavelength' in new_data.keys():
+                global wavelength
+                global line
+                global ax
+                wavelength = new_data['wavelength']
+                del new_data['wavelength']
+                fig, ax = plt.subplots(figsize=(10, 6))
+                line = ax.plot([], [], color='orange')
+                fig.patch.set_facecolor('#0E1117')
+                ax.set_facecolor('#0E1117')
+                ax.set_xlabel("Wavelength (nm)", color="white")
+                ax.set_ylabel("Fluorescence intensity", color="white")
+                ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
+                ax.set_xlim(x_min, x_max)
+                ax.set_ylim(y_min, y_max)
+                ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
+                ax.tick_params(axis='y', colors='white')
+                ax.tick_params(axis='x', colors='white')
+                ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
+                line.set_xdata(wavelength)
+                st.pyplot(fig)
+        st.session_state.previous_data = data  # update state
+        return new_data
     return {}
 
 
@@ -57,29 +78,21 @@ st.button("Re-run")
 x_min, x_max = st.sidebar.slider("Select X-axis range:", 900, 1700, value=(900, 1700), step=10)
 y_min, y_max = st.sidebar.slider("Select Y-axis range:", 0, 70000, value=(0, 10000), step=1000)
 
-
+data_placeholder = st.empty()
+message_placeholder = st.empty()
 while True:
-    wavelength, new_data = get_new_data()
-    fig, ax = plt.subplots(figsize=(10, 6))
-    fig.patch.set_facecolor('#0E1117')
-    ax.set_facecolor('#0E1117')
-    ax.set_xlabel("Wavelength (nm)", color="white")
-    ax.set_ylabel("Fluorescence intensity", color="white")
-    ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-    ax.set_xlim(x_min, x_max)
-    ax.set_ylim(y_min, y_max)
-    ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
-    ax.tick_params(axis='y', colors='white')
-    ax.tick_params(axis='x', colors='white')
-    ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
-    st.pyplot(fig)
-
+    new_data = get_new_data()
     if new_data:
-        st.markdown("### New Data Update!:")
-        st.json(new_data)
+        message_placeholder.markdown("### New Data Update!:")
+        df = pd.DataFrame(new_data)
+        df.insert(0, 'Wavelength', wavelength)
+        data_placeholder.dataframe(df)  # 동일 위치에 데이터프레임 갱신
+
         for key, value in new_data:
+            line.set_ydata(value)  # Update y data
+            ax.set_title(f"Intensity for Well {key}", fontsize=15, color="white", fontweight='bold')
             ax.plot(wavelength, value, label=key, linewidth=1)
-            st.pyplot(fig)
+
     else:
-        st.write("No New Data:")
+        message_placeholder.write("No New Data")
     time.sleep(2)
