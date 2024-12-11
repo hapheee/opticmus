@@ -88,7 +88,7 @@ while True:
             for key, value in new_data:
                 print(i)
         except Exception as e:
-            st.write(f"update fail: {e}")
+            st.write(f"update fail: {e}", len(new_data))
         # for key, value in new_data:
         #     try:         
         #         line.set_xdata(wavelength) 
