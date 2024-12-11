@@ -68,11 +68,8 @@ def get_new_data():
             if 'wavelength' in new_data.keys():
                 global wavelength
                 wavelength = new_data['wavelength']
-                st.write(wavelength)
-                st.write(1)
-                wavelength = new_data['wavelength']
                 del new_data['wavelength']
-                line.set_xdata(wavelength)
+                line.set_xdata(list(wavelength))
                 fig.canvas.draw()
         st.session_state.previous_data = data  # update state
         return new_data
