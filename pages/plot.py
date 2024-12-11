@@ -72,7 +72,9 @@ def get_new_data():
                 try:
                     line.set_xdata(wavelength)
                     fig.canvas.draw()
+                    
                 except Exception as e:
+                    st.write(len(wavelength))
                     st.write(f"update fail: {e}")
 
         st.session_state.previous_data = data  # update state
