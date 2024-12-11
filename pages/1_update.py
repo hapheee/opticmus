@@ -87,7 +87,7 @@ def get_new_data():
 
 while True:
     new_data = get_new_data()
-    if new_data
+    if new_data:
         df = pd.DataFrame(new_data)
         df.insert(0, 'Wavelength', wavelength)
         data_placeholder.dataframe(df)  
