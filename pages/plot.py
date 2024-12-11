@@ -95,7 +95,7 @@ while True:
                 ax.set_title(f"Intensity for Well {key}", fontsize=15, color="white", fontweight='bold')
                 ax.plot(wavelength, value, label=key, linewidth=1)
                 fig.canvas.draw()
-                #graph_placeholder.pyplot(fig) 
+                graph_placeholder.pyplot(fig) 
             except Exception as e:
                 st.write(f"update fail: {e}")
     time.sleep(1)
