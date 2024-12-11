@@ -84,21 +84,16 @@ while True:
         df = pd.DataFrame(new_data)
         df.insert(0, 'Wavelength', wavelength)
         data_placeholder.dataframe(df)  # 동일 위치에 데이터프레임 갱신
-        try:
-            for key, value in new_data.items():
-                print(key)
-        except Exception as e:
-            st.write(f"update fail: {e}", len(new_data))
-        # for key, value in new_data:
-        #     try:         
-        #         line.set_xdata(wavelength) 
-        #         line.set_ydata(value)  # Update y data
-        #         ax.set_xlim(x_min, x_max)
-        #         ax.set_ylim(y_min, y_max)
-        #         ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
-        #         ax.set_title(f"Intensity for Well {key}", fontsize=15, color="white", fontweight='bold')
-        #         ax.plot(wavelength, value, label=key, linewidth=1)
-        #         fig.canvas.draw()
-        #     except Exception as e:
-        #         st.write(f"update fail: {e}")
+        for key, value in new_data.items():
+            try:         
+                line.set_xdata(wavelength) 
+                line.set_ydata(value)  # Update y data
+                ax.set_xlim(x_min, x_max)
+                ax.set_ylim(y_min, y_max)
+                ax.set_yticks(np.arange(y_min, y_max, int(y_max / 10)))
+                ax.set_title(f"Intensity for Well {key}", fontsize=15, color="white", fontweight='bold')
+                ax.plot(wavelength, value, label=key, linewidth=1)
+                fig.canvas.draw()
+            except Exception as e:
+                st.write(f"update fail: {e}")
     time.sleep(2)
