@@ -60,7 +60,6 @@ graph_placeholder.pyplot(fig)
 # Initialize Streamlit sessions state
 if "previous_data" not in st.session_state:
     st.session_state.previous_data = {}
-    st.write('2')
 
 # Get data and Chck updated Data
 def get_new_data():
@@ -80,7 +79,7 @@ def get_new_data():
 while True:
     new_data = get_new_data()
     if new_data:
-        st.write(1)
+        st.write(1,new_data)
         wavelength = new_data['wavelength']
         del new_data['wavelength']
         df = pd.DataFrame(new_data)
