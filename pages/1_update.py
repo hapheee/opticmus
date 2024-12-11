@@ -81,12 +81,9 @@ while True:
         wavelength = new_data['wavelength']
         del new_data['wavelength']
         df = pd.DataFrame(new_data)
-        try:
-            df.insert(0, 'Wavelength', wavelength)
-        except Exception as e:
-            st.write(f"error: {e}")
-        
+        df.insert(0, 'Wavelength', wavelength)
         data_placeholder.dataframe(df)  
+        
         for key, value in new_data.items():
             try:         
                 line.set_xdata(wavelength) 
