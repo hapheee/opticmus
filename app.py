@@ -46,8 +46,12 @@ col1, col2, col3 = st.columns(3)        #st.columns([2, 1, 1]) 작성하면 각 
 col1.metric('exposure time', f'{exposure_time}s', '1.5°C')
 col2.metric('tirgger mode', trigger_mode[trigger], '-3%')
 col3.metric('linearity correction', linearity, '-5%')
-input_image = st.file_uploader(" **01. 의류 이미지를 업로드하세요. (배경이 깔끔한 사진이라면 더 좋습니다!)** ", type=['png', 'jpg', 'jpeg'])
+
+
+image_url = 'plate.png'
+st.image(image_url)
 st.markdown('--------------------------------------------------------------------------------------')
+
 
 
 st.balloons()
