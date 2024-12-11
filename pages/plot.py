@@ -86,7 +86,7 @@ while True:
         data_placeholder.dataframe(df)  # 동일 위치에 데이터프레임 갱신
         try:
             for key, value in new_data.items():
-                print(i)
+                print(key)
         except Exception as e:
             st.write(f"update fail: {e}", len(new_data))
         # for key, value in new_data:
