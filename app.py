@@ -49,7 +49,7 @@ col3.metric('linearity correction', linearity, '-5%')
 
 
 image_url = 'plate.png'
-st.image(image_url)
+st.image(image_url, width=300)
 st.markdown('--------------------------------------------------------------------------------------')
 
 
