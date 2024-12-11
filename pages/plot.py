@@ -95,7 +95,6 @@ while True:
                 ax.plot(wavelength, value, label=key, linewidth=1)
                 fig.canvas.draw()
                 graph_placeholder.pyplot(fig) 
-                st.write(1)
             except Exception as e:
                 st.write(f"update fail: {e}")
     time.sleep(2)
