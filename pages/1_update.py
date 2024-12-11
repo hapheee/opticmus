@@ -67,6 +67,8 @@ def get_new_data():
     data = get_data_from_firebase()
     if data:
         new_data = {}
+        if new_data.keys() ==  st.session_state.previous_data:
+            return False
         for key, value in data.items():
             if key not in st.session_state.previous_data or key == 'wavelength':
                 new_data[key] = value
@@ -97,4 +99,6 @@ while True:
                 graph_placeholder.pyplot(fig) 
             except Exception as e:
                 st.write(f"update fail: {e}")
+    else:
+        pass
     time.sleep(1)
