@@ -86,13 +86,6 @@ while True:
         data_placeholder.dataframe(df)  # 동일 위치에 데이터프레임 갱신
 
         for key, value in new_data:
-                            try:
-                    line.set_xdata(wavelength)
-                    fig.canvas.draw()
-                    
-                except Exception as e:
-                    st.write(len(wavelength))
-                    st.write(f"update fail: {e}")
             try:         
                 line.set_xdata(wavelength) 
                 line.set_ydata(value)  # Update y data
