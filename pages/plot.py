@@ -70,7 +70,7 @@ def get_new_data():
                 wavelength = new_data['wavelength']
                 del new_data['wavelength']
                 try:
-                    line.set_xdata(list(wavelength))
+                    line.set_xdata(wavelength)
                     fig.canvas.draw()
                 except Exception as e:
                     st.write(f"update fail: {e}")
