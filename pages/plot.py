@@ -77,8 +77,9 @@ def get_new_data():
         return new_data
     return {}
     
-
+count = 0
 while True:
+    st.write(count)
     new_data = get_new_data()
     if new_data:
         df = pd.DataFrame(new_data)
@@ -97,4 +98,4 @@ while True:
                 #graph_placeholder.pyplot(fig) 
             except Exception as e:
                 st.write(f"update fail: {e}")
-    time.sleep(2)
+    time.sleep(1)
