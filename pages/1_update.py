@@ -85,7 +85,11 @@ while True:
     new_data = get_new_data()
     if new_data:
         df = pd.DataFrame(new_data)
-        df.insert(0, 'Wavelength', wavelength)
+        try:
+            df.insert(0, 'Wavelength', wavelength)
+        except Exception as e:
+            st.write(f"error: {e}")
+        
         data_placeholder.dataframe(df)  
         for key, value in new_data.items():
             try:         
