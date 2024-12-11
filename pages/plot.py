@@ -75,12 +75,9 @@ def get_new_data():
     
 data_placeholder = st.empty()
 message_placeholder = st.empty()
-count =  0
 while True:
-    count += 1
     new_data = get_new_data()
     if new_data:
-        st.write(count)
         df = pd.DataFrame(new_data)
         df.insert(0, 'Wavelength', wavelength)
         data_placeholder.dataframe(df)  # 동일 위치에 데이터프레임 갱신
@@ -94,6 +91,7 @@ while True:
                 ax.set_title(f"Intensity for Well {key}", fontsize=15, color="white", fontweight='bold')
                 ax.plot(wavelength, value, label=key, linewidth=1)
                 fig.canvas.draw()
+                st.write(1)
             except Exception as e:
                 st.write(f"update fail: {e}")
     time.sleep(2)
