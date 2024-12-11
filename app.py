@@ -37,8 +37,8 @@ st.markdown(
     """
     **Navigation**: Use the menu on the left to explore the app's features.
     - **Welcome**: Introduction to the app.
-    - **Plot**: Visualize the latest plate reader data.
-    - **Datas**: View all the data in a tabular format.
+    - **Updates**: Visualize the latest plate reader data.
+    - **Datas**: View all the data and you can plot or download it. 
     """
 )
 
@@ -49,8 +49,8 @@ col3.metric('linearity correction', linearity, '-5%')
 
 
 image_url = 'plate.png'
-st.image(image_url, width=900)
-st.markdown('--------------------------------------------------------------------------------------')
+# st.image(image_url, width=900)
+# st.markdown('--------------------------------------------------------------------------------------')
 
 
 
