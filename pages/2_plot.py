@@ -60,14 +60,14 @@ if data:
    ax.tick_params(axis='y', colors='white')  # y축 눈금 및 레이블 색상
    ax.tick_params(axis='x', colors='white')
    ax.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
-   graph_placeholder.pyplot(fig)
+   st.pyplot(fig)
 
 
    if selected_wells:
       for key in selected_wells:
          ax.plot(wavelength, data[key], label=key, linewidth=1)
       ax.legend(facecolor='#1e1e1e', edgecolor='white', labelcolor='white')
-      graph_placeholder.pyplot(fig)
+      st.pyplot(fig)
    else:
       pass
       
