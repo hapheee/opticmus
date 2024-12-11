@@ -69,8 +69,12 @@ def get_new_data():
                 global wavelength
                 wavelength = new_data['wavelength']
                 del new_data['wavelength']
-                line.set_xdata(list(wavelength))
-                fig.canvas.draw()
+                try:
+                    line.set_xdata(list(wavelength))
+                    fig.canvas.draw()
+                except Exception as e:
+                    print(f"update fail: {e}")
+
         st.session_state.previous_data = data  # update state
         return new_data
     return {}
